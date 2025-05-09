@@ -1,0 +1,11 @@
+<!-- templates/history.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Roll History</h2>
+<ul>
+    {% for roll in history %}
+    <li>{{ roll }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

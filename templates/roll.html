@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- templates/roll.html -->
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-
-<body>
-    <h1>Roll Page: </h1>
-    <h2> {{ result }}</h2>
-</body>
-
-</html>
+{% block content %}
+<h2>Roll Result</h2>
+<p>You rolled a {{ result }}!</p>
+{% endblock %}

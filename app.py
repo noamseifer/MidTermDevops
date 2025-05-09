@@ -14,7 +14,13 @@ def show_main_page():
 @app.route('/roll', methods=['GET'])
 def roll_die():
     roll = random.randint(1, 6)
+    r.lpush("rolls-history", roll)
     return render_template("roll.html", result=roll)
+
+@app.route('/history')
+def show_history():
+    history = r.lrange('rolls-history',0,-1)
+    return render_template('history.html', history=history)
 
 
 if __name__ == '__main__':
