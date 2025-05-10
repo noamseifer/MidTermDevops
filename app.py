@@ -5,7 +5,7 @@ import redis
 app = Flask(__name__)
 
 # The redis instance
-r = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True)
+r = redis.Redis(host='redis', port=6379, db=0, decode_responses=True)
 
 @app.route('/')
 def show_main_page():
@@ -24,4 +24,4 @@ def show_history():
 
 
 if __name__ == '__main__':
-    app.run(debug=True,host="0.0.0.0", port=5005)
+    app.run(debug=True,host="0.0.0.0", port=5000)
