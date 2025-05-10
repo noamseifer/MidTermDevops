@@ -5,3 +5,8 @@ services:
       - "8000:5000"
   redis:
     image: "redis:alpine"
+    volumes:
+      - redis-data:/data # Persist Redis data
+
+volumes:
+  redis-data: # Docker-managed volume for Redis data
