@@ -84,3 +84,40 @@ web:
   environment:
     - FLASK_PORT=5001
 ```
+
+##  System Architecture
+```mermaid
+flowchart LR
+    A[User] -->|Access| B[Browser]
+    B -->|"HTTP Request (GET/POST)"| C[Flask App-Port 8000]
+    C -->|"/roll"| D[Generate Random Die Roll]
+    D --> E[Store Roll in Redis]
+    C -->|"/history"| F[Retrieve Roll History]
+    E --> G[Redis Service-Port 6379]
+    F --> G
+    G --> C
+    C -->|"HTTP Response (HTML/JSON)"| B
+    B -->|Display| A
+
+    subgraph Docker Environment
+        C
+        G
+    end
+    
+    style A fill:#f9f,stroke:#333
+    style B fill:#bbf,stroke:#333
+    style C fill:#9f9,stroke:#333
+    style G fill:#f99,stroke:#333
+```
+### What this diagram shows:
+- **User** interacts with the application through a **Browser**.
+- The **Browser** sends **HTTP requests (GET/POST)** to the **Flask App** running on **port 8000**.
+- For the **/roll** endpoint, the **Flask App** generates a **random die roll result**.
+- The result is then **stored in Redis**, acting as the application's database.
+- For the **/history** endpoint, the **Flask App** retrieves the **roll history** from **Redis**.
+- The **Redis Service** operates on **port 6379** and handles data storage for both endpoints.
+- After processing, the **Flask App** returns an **HTTP response (HTML/JSON)** back to the **Browser**.
+- The **Browser** then displays the information to the **User**.
+- The **Flask App** and **Redis Service** are both managed and orchestrated within a **Docker Environment** using **Docker Compose**.
+
+
