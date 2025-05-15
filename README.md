@@ -84,3 +84,23 @@ web:
   environment:
     - FLASK_PORT=5001
 ```
+##  System Architecture
+
+```mermaid
+flowchart TD
+    A[Client (Browser)] <-->|HTTP Requests| B[Flask App (Web Service)]
+    B -->|Read/Write Operations| C[Redis Container (Database)]
+    C -->|Data Persistence| D[Host Filesystem (Docker Volume)]
+
+    subgraph Docker-Compose
+        B
+        C
+    end
+```
+
+### What This Diagram Shows:
+- **Client (Browser)** sends HTTP requests to the Flask web service.
+- **Flask App** communicates with the **Redis database** for storing and retrieving data.
+- **Redis** persists data onto the **host machine** via Docker Volume.
+- **Docker Compose** manages the orchestration of both Flask and Redis containers.
+
